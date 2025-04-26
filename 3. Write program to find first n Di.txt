@@ -1,0 +1,72 @@
+3. Write program to find first n Disarium numbers and Disarium numbers between two given numbers.
+
+A number is said to be Disarium if it is equal to sum of its digits raised to the power of their respective position in the number. 
+For example, 135 is a Disarium number. Because, it is equal to sum of its digits raised to the power of their respective position.
+
+135 = 1^1 + 3^2 + 5^3
+135 = 1 + 9 + 125
+
+Note: Paste the code in the answer. Also push it to git/drive
+*
+3 points
+
+
+package training;
+
+import java.util.Scanner;
+public class dis {
+	    public static boolean isDisarium(int num) {
+	        int temp = num;
+	        int length = String.valueOf(num).length();
+	        int sum = 0;
+
+	        while (temp > 0) {
+	            int digit = temp % 10;
+	            sum += Math.pow(digit, length);
+	            temp /= 10;
+	            length--;
+	        }
+	        return sum == num;
+	    }
+
+	    public static void findFirstNDisarium(int n) {
+	        int count = 0;
+	        int number = 0;
+
+	        System.out.println("First " + n + " Disarium numbers are:");
+	        while (count < n) {
+	            if (isDisarium(number)) {
+	                System.out.print(number + " ");
+	                count++;
+	            }
+	            number++;
+	        }
+	        System.out.println();
+	    }
+
+	    public static void findDisariumInRange(int start, int end) {
+	        System.out.println("Disarium numbers between " + start + " and " + end + " are:");
+	        for (int i = start; i <= end; i++) {
+	            if (isDisarium(i)) {
+	                System.out.print(i + " ");
+	            }
+	        }
+	        System.out.println();
+	    }
+
+	    public static void main(String[] args) {
+	        Scanner sc = new Scanner(System.in);
+
+	        System.out.print("Enter how many Disarium numbers you want: ");
+	        int n = sc.nextInt();
+	        findFirstNDisarium(n);
+
+	        System.out.print("Enter the starting number: ");
+	        int start = sc.nextInt();
+	        System.out.print("Enter the ending number: ");
+	        int end = sc.nextInt();
+	        findDisariumInRange(start, end);
+
+	        sc.close();
+	    }
+	}
